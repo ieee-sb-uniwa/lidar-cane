@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwahdxl4oikd6"]
+
+[ext_resource type="Script" uid="uid://bnpb4x087dyap" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://7tgqoixj1e1n" path="res://ray_cast_3d.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://8ductygt6drg" path="res://boxes.gd" id="2_0xm2m"]
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+
+[sub_resource type="Environment" id="Environment_7dm0k"]
+background_color = Color(0.45478737, 0.5641071, 0.520815, 1)
+sky = SubResource("Sky_ig7tw")
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_h2yge")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12543547, -0.0153387785, -0.011551619)
+environment = SubResource("Environment_7dm0k")
+fov = 100.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+target_position = Vector3(0, 0, -10)
+script = ExtResource("1_ig7tw")
+
+[node name="boxes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03865403, 0, -2.45186)
+script = ExtResource("2_0xm2m")
+
+[connection signal="connected" from="." to="Camera3D/RayCast3D" method="_on_node_3d_connected"]
+[connection signal="start_moving" from="Camera3D/RayCast3D" to="." method="_on_ray_cast_3d_start_moving"]
+[connection signal="stop_moving" from="Camera3D/RayCast3D" to="." method="_on_ray_cast_3d_stop_moving"]
