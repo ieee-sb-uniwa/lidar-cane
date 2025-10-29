@@ -18,3 +18,11 @@ config/icon="res://icon.svg"
 [dotnet]
 
 project/assembly_name="lidar game"
+
+[global_group]
+
+box=""
+
+[physics]
+
+common/physics_ticks_per_second=120

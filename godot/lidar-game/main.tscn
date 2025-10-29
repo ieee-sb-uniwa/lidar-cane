@@ -26,3 +26,7 @@ script = ExtResource("1_ig7tw")
 [node name="boxes" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03865403, 0, -2.45186)
 script = ExtResource("2_0xm2m")
+
+[connection signal="connected" from="." to="Camera3D/RayCast3D" method="_on_node_3d_connected"]
+[connection signal="start_moving" from="Camera3D/RayCast3D" to="." method="_on_ray_cast_3d_start_moving"]
+[connection signal="stop_moving" from="Camera3D/RayCast3D" to="." method="_on_ray_cast_3d_stop_moving"]

@@ -32,3 +32,8 @@ func spawn():
 	box_instance = box_scene.instantiate()
 	add_child(box_instance)
 	box_instance.set_as_top_level(true)
+	# direction in front of this node
+	var forward = -transform.basis.z.normalized()
+	
+	# place the box in front of the player
+	box_instance.global_position = global_position + forward
