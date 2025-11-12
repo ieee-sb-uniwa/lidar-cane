@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwahdxl4oikd6"]
+[gd_scene load_steps=7 format=3 uid="uid://mrm8cnkakk27"]
 
-[ext_resource type="Script" uid="uid://bnpb4x087dyap" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="Script" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://7tgqoixj1e1n" path="res://ray_cast_3d.gd" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://8ductygt6drg" path="res://boxes.gd" id="2_0xm2m"]
+[ext_resource type="Script" path="res://boxes.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://clf8no7c1u3n3" path="res://automatic_connection.cs" id="4_1bvp3"]
 
 [sub_resource type="Sky" id="Sky_ig7tw"]
