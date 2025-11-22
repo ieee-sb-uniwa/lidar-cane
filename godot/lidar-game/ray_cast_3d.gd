@@ -15,16 +15,19 @@ var prev_angle = 0
 var i = 0
 var angles_to_send = 0
 var previous_angle = 0
+
 #set false for production
 var start_game = true
 
+func _ready():
+	ray.rotation_degrees.y = -300
 
 func _process(delta):
 	#if the game has start, rotate the raycast
 	if start_game == true:
 		ray.rotation_degrees.y = fmod(ray.rotation_degrees.y, 360)
 
-		ray.rotation_degrees.y += rotation_speed * delta
+		ray.rotation_degrees.y -= rotation_speed * delta
 		#rot_func(60.0, delta, ray)
 		#get the current angle
 		var current_angle = rotation_degrees.y
@@ -32,9 +35,11 @@ func _process(delta):
 		#needs this in order to move the index
 		#this line of code checks if the rotation has change
 		
-		if(int(current_angle)>300 or int(current_angle)<60):
+		if(int(current_angle)<-300 or int(current_angle)>-60):
 			
-			if int(current_angle / 6) != int(prev_angle / 6):
+			#if int(current_angle / 6) != int(prev_angle / 6):
+			print(int(current_angle)%6)
+			if int(current_angle)%6 == 0:
 				
 				#when the ray collides stop moving and enter 1 if the collider is box otherwise enter 0
 				if ray.is_colliding():
@@ -61,7 +66,7 @@ func _process(delta):
 					items.append(0)
 					emit_signal("start_moving")
 				i += 1
-			print(items)
+			
 		#clear the array and set the index to 0
 			if(i>9):
 				items.clear()
