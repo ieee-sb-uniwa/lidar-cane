@@ -52,7 +52,7 @@ func _on_ray_cast_3d_stop_moving() -> void:
 func moving():
 	#simple movement script
 	if(movement):
-		translate(Vector3(0,0,-.01))
+		translate(Vector3(0,0,-.005))
 
 
 func _on_ray_cast_3d_start_moving() -> void:
