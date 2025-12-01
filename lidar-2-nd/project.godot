@@ -11,7 +11,11 @@ config_version=5
 [application]
 
 config/name="lidar-2nd"
+<<<<<<< Updated upstream
 run/main_scene="uid://d1u6b0wjejxew"
+=======
+run/main_scene="uid://l274aoiyye3m"
+>>>>>>> Stashed changes
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

@@ -1,2 +1,4 @@
-res://moving.tscn
-res://moving.gd
+res://box.tscn
+res://boxes.gd
+res://camera_3d.gd
+res://ray_cast_3d.gd

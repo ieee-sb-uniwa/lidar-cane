@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bif47dsanuc4k"]
+
+[ext_resource type="Script" uid="uid://dcjra857nug77" path="res://rigid_body_3d.gd" id="1_4flbx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_onrkg"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_i3pqv"]
+sky_material = SubResource("ProceduralSkyMaterial_onrkg")
+
+[sub_resource type="Environment" id="Environment_hqtel"]
+background_mode = 2
+sky = SubResource("Sky_i3pqv")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sh265"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hqtel")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+script = ExtResource("1_4flbx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_4flbx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_sh265")
+skeleton = NodePath("")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
+transform = Transform3D(0.99917966, 0, 0.04049802, 0, 1, 0, -0.04049802, 0, 0.99917966, -0.069624424, 1.2449554, 1.428685)
+fov = 132.44272
