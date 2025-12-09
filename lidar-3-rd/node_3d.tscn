@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh5ustsfvgdgn"]
+[gd_scene load_steps=8 format=3 uid="uid://bh5ustsfvgdgn"]
 
-[ext_resource type="Script" uid="uid://sbcvs6fej61" path="res://ray_cast_3d.gd" id="1_a202f"]
+[ext_resource type="Script" uid="uid://c0ah2w4alpbo8" path="res://Person.gd" id="2_a0tk4"]
 [ext_resource type="Script" uid="uid://c8f6k6bvffcp4" path="res://box.gd" id="2_noarx"]
+[ext_resource type="Script" uid="uid://cmxtflwg1hkt8" path="res://ray_cast_3d20.gd" id="3_a0tk4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,41 +17,39 @@ sky = SubResource("Sky_noarx")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="GDScript" id="GDScript_noarx"]
-script/source = "extends Camera3D
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a0tk4"]
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
-
-[node name="Node3D" type="Node3D"]
+[node name="Main_scene" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a0tk4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.9941726, -0.090617605, 0.058389973, -0.04180042, 0.1752196, 0.9836416, -0.09936631, -0.98035026, 0.17041065, 0.019628167, 27.127754, 6.0556297)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-script = SubResource("GDScript_noarx")
-
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Box_creation" type="Node3D" parent="."]
 script = ExtResource("2_noarx")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 1)
+[node name="Person" type="Node3D" parent="."]
+script = ExtResource("2_a0tk4")
+
+[node name="RayCast3D" type="RayCast3D" parent="Person"]
+transform = Transform3D(1.1924881e-08, 0, -0.99999994, 0, 0.99999994, 0, 1, 0, 1.192488e-08, 0, 0, 1)
 target_position = Vector3(0, 0, -50)
 debug_shape_thickness = 3
-script = ExtResource("1_a202f")
+script = ExtResource("3_a0tk4")
 
-[connection signal="child_entered_tree" from="RayCast3D" to="RayCast3D" method="_on_child_entered_tree"]
-[connection signal="child_exiting_tree" from="RayCast3D" to="RayCast3D" method="_on_child_exiting_tree"]
+[node name="Timer" type="Timer" parent="Person/RayCast3D"]
+
+[node name="Camera3D" type="Camera3D" parent="Person"]
+transform = Transform3D(1, 0, -8.881785e-16, 0, 1, 0, 8.881785e-16, 0, 1, 0, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Person"]
+mesh = SubResource("CapsuleMesh_a0tk4")
+
+[connection signal="child_entered_tree" from="Person/RayCast3D" to="Person/RayCast3D" method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="Person/RayCast3D" to="Person/RayCast3D" method="_on_child_exiting_tree"]
