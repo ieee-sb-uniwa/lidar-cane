@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://bh5ustsfvgdgn"]
 
-[ext_resource type="Script" uid="uid://c0temtqfw8rwm" path="res://camera_3d_2.gd" id="1_r3fl7"]
-[ext_resource type="Script" uid="uid://bnqldswverli4" path="res://person.gd" id="2_a0tk4"]
-[ext_resource type="Script" uid="uid://c8f6k6bvffcp4" path="res://box.gd" id="2_noarx"]
-[ext_resource type="Script" uid="uid://cmxtflwg1hkt8" path="res://ray_cast_3d20.gd" id="3_a0tk4"]
+[ext_resource type="Script" uid="uid://c0temtqfw8rwm" path="res://code/camera_3d_2.gd" id="1_r3fl7"]
+[ext_resource type="Script" uid="uid://c8f6k6bvffcp4" path="res://code/box.gd" id="2_noarx"]
+[ext_resource type="Script" uid="uid://cmxtflwg1hkt8" path="res://code/ray_cast_3d20.gd" id="3_a0tk4"]
+[ext_resource type="Script" uid="uid://dn0adexo3xvqe" path="res://code/raycast_instant.gd" id="4_xvgsr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -38,13 +38,13 @@ shadow_enabled = true
 script = ExtResource("2_noarx")
 
 [node name="Person" type="Node3D" parent="."]
-script = ExtResource("2_a0tk4")
+script = ExtResource("3_a0tk4")
 
 [node name="RayCast3D" type="RayCast3D" parent="Person"]
 transform = Transform3D(3.3462133e-05, 0.019197412, -0.99981564, 0.0017450067, 0.9998141, 0.019197442, 0.99999845, -0.0017453274, -4.3703327e-08, -1.1920929e-07, -0.02821052, -0.06288743)
 target_position = Vector3(0, 0, -5)
 debug_shape_thickness = 3
-script = ExtResource("3_a0tk4")
+script = ExtResource("4_xvgsr")
 
 [node name="Timer" type="Timer" parent="Person/RayCast3D"]
 

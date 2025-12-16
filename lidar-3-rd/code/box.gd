@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var box_scene = preload("res://box.tscn")
+@onready var box_scene = preload("res://scenes/box.tscn")
 #move speed of the spawner
 var move_speed = 30.0  
 #direction of the spawner
