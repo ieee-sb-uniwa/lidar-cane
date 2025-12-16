@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2bnelguk6uls"]
-
-[ext_resource type="Script" uid="uid://bqs5lky3tnwfg" path="res://ray_cast_3d.gd" id="1_vlmgq"]
-
-[node name="RayCast3D" type="RayCast3D"]
-script = ExtResource("1_vlmgq")
