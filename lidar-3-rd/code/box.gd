@@ -19,10 +19,10 @@ func _ready():
 	
 #if there are less tan 10 boxes
 func _process(delta):
-	if(get_child_count()<30):
+	if(get_child_count()<500):
 		#move the spawner on a random x direction and a random z direction
-		position.x = randi_range(-10,10)
-		position.z = randi_range(current_pos-2, current_pos)
+		position.x = randi_range(-5,5)
+		position.z = randi_range(current_pos-1, current_pos)
 		#set the current z position of the spawner
 		current_pos = position.z
 		spawn()

@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bh5ustsfvgdgn"]
+[gd_scene load_steps=12 format=3 uid="uid://bh5ustsfvgdgn"]
 
 [ext_resource type="Script" uid="uid://c0temtqfw8rwm" path="res://code/camera_3d_2.gd" id="1_r3fl7"]
-[ext_resource type="Script" uid="uid://c8f6k6bvffcp4" path="res://code/box.gd" id="2_noarx"]
-[ext_resource type="Script" uid="uid://cmxtflwg1hkt8" path="res://code/ray_cast_3d20.gd" id="3_a0tk4"]
 [ext_resource type="Script" uid="uid://bnqldswverli4" path="res://code/Person.gd" id="3_xvgsr"]
+[ext_resource type="Script" uid="uid://doj25wykm11c6" path="res://scenes/closerayleft.gd" id="4_10v3s"]
+[ext_resource type="Script" uid="uid://bpsn3dqmk4jt2" path="res://scenes/raycastfornavigation(current).gd" id="5_10v3s"]
+[ext_resource type="PackedScene" uid="uid://b444pfikcm3a7" path="res://scenes/box.tscn" id="5_a6664"]
+[ext_resource type="Script" uid="uid://di55mgmi23g73" path="res://scenes/closeproxray.gd" id="5_cptob"]
+[ext_resource type="PackedScene" uid="uid://8jmi7qq1uugk" path="res://3dassets/apartment.gltf" id="7_10v3s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -20,11 +23,12 @@ glow_enabled = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a0tk4"]
 radius = 0.1
+height = 0.395
 
 [node name="Main_scene" type="Node3D"]
 
 [node name="Camera3D2" type="Camera3D" parent="."]
-transform = Transform3D(0.9941726, -0.0906176, 0.058389973, -0.04180042, 0.1752196, 0.9836416, -0.09936631, -0.98035026, 0.17041065, 0.07593024, 6.558464, -0.0797348)
+transform = Transform3D(0.9941726, -0.0906176, 0.058389973, -0.04180042, 0.1752196, 0.9836416, -0.09936631, -0.98035026, 0.17041065, 0.07593024, 8.378361, -0.0797348)
 script = ExtResource("1_r3fl7")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -35,23 +39,111 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Box_creation" type="Node3D" parent="."]
-script = ExtResource("2_noarx")
 
 [node name="Person" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1.0000001, 5.2899995e-26, -7.704027e-13, -1.8626451e-09, 1.0000001, -2.3992525e-11, 3.1491123e-12, 9.226179e-11, 1.0000001, 5.820766e-11, 0, 7.450581e-09)
 script = ExtResource("3_xvgsr")
-
-[node name="RayCast3D" type="RayCast3D" parent="Person"]
-transform = Transform3D(3.3462133e-05, 0.019197412, -0.99981564, 0.0017450067, 0.9998141, 0.019197442, 0.99999845, -0.0017453274, -4.3703327e-08, -1.1920929e-07, -0.02821052, -0.06288743)
-target_position = Vector3(0, 0, -5)
-debug_shape_thickness = 3
-script = ExtResource("3_a0tk4")
-
-[node name="Timer" type="Timer" parent="Person/RayCast3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Person"]
 mesh = SubResource("CapsuleMesh_a0tk4")
 
 [node name="Camera3D" type="Camera3D" parent="Person"]
 
-[connection signal="child_entered_tree" from="Person/RayCast3D" to="Person/RayCast3D" method="_on_child_entered_tree"]
-[connection signal="child_exiting_tree" from="Person/RayCast3D" to="Person/RayCast3D" method="_on_child_exiting_tree"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Person"]
+remote_path = NodePath("../../RayCast3D")
+update_rotation = false
+update_scale = false
+
+[node name="RayCast3D" type="RayCast3D" parent="Person"]
+transform = Transform3D(0.88860923, -2.1848598e-10, -0.45866507, -1.9647695e-10, 1, -8.570027e-10, 0.45866507, 8.5165763e-10, 0.88860923, 0, 0, 0)
+target_position = Vector3(-0.2, 0, 0)
+script = ExtResource("4_10v3s")
+
+[node name="RayCast3D2" type="RayCast3D" parent="Person"]
+transform = Transform3D(-0.7981205, -3.3637153e-09, -0.6024978, -3.3348044e-09, 1, -1.1653808e-09, 0.6024978, 1.0790983e-09, -0.7981205, 0, 0, 0)
+target_position = Vector3(-0.2, 0, 0)
+script = ExtResource("5_cptob")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1.0000001, 5.2899995e-26, -7.704027e-13, -1.8626451e-09, 1.0000001, -2.3992525e-11, 3.1491123e-12, 9.226179e-11, 1.0000001, 5.820766e-11, 0, 7.450581e-09)
+target_position = Vector3(0, 0, -20)
+debug_shape_thickness = 3
+script = ExtResource("5_10v3s")
+
+[node name="StaticBody3D10" parent="." instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4848764, -0.00057792664, 2.8705788)
+visible = false
+
+[node name="StaticBody3D" parent="StaticBody3D10" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7498014, 0, 3.63546)
+
+[node name="StaticBody3D2" parent="StaticBody3D10" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7498014, 0.014328718, 3.671564)
+
+[node name="StaticBody3D3" parent="StaticBody3D10" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8417081, 6.67572e-05, 3.6913915)
+
+[node name="StaticBody3D4" parent="StaticBody3D10" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27060676, -1.1920929e-07, 3.7337117)
+
+[node name="StaticBody3D5" parent="StaticBody3D10" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21542072, 0, 2.7605443)
+
+[node name="StaticBody3D6" parent="StaticBody3D10" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17199945, -0.00011634827, 1.8762555)
+
+[node name="StaticBody3D7" parent="StaticBody3D10" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8786151, -0.00015449524, 2.7118058)
+
+[node name="StaticBody3D8" parent="StaticBody3D10" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8089182, -0.00015640259, 1.6941738)
+
+[node name="StaticBody3D9" parent="StaticBody3D10" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12855864, 3.6239624e-05, 0.99201727)
+
+[node name="StaticBody3D11" parent="StaticBody3D10" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9098917, -0.0006599426, -0.15532494)
+
+[node name="StaticBody3D11" parent="." instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8182683, -0.00057792664, 5.7066164)
+visible = false
+
+[node name="StaticBody3D" parent="StaticBody3D11" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7498014, 0, 3.63546)
+
+[node name="StaticBody3D2" parent="StaticBody3D11" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7498014, 0.014328718, 3.671564)
+
+[node name="StaticBody3D3" parent="StaticBody3D11" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8417081, 6.67572e-05, 3.6913915)
+
+[node name="StaticBody3D4" parent="StaticBody3D11" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27060676, -1.1920929e-07, 3.7337117)
+
+[node name="StaticBody3D5" parent="StaticBody3D11" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21542072, 0, 2.7605443)
+
+[node name="StaticBody3D6" parent="StaticBody3D11" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17199945, -0.00011634827, 1.8762555)
+
+[node name="StaticBody3D7" parent="StaticBody3D11" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8786151, -0.00015449524, 2.7118058)
+
+[node name="StaticBody3D8" parent="StaticBody3D11" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7920773, -4.005432e-05, 1.5496783)
+
+[node name="StaticBody3D9" parent="StaticBody3D11" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12855864, 3.6239624e-05, 0.99201727)
+
+[node name="StaticBody3D11" parent="StaticBody3D11" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.137154, -0.00023460388, -0.7188816)
+
+[node name="StaticBody3D10" parent="StaticBody3D11" instance=ExtResource("5_a6664")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7380419, 0.00057792664, 0.53210926)
+
+[node name="apartment" parent="." instance=ExtResource("7_10v3s")]
+transform = Transform3D(-0.019632723, 0, 0.749743, 0, 0.75, 0, -0.749743, 0, -0.019632723, -0.73129845, -0.39518166, -0.14934444)
+
+[connection signal="child_entered_tree" from="RayCast3D" to="RayCast3D" method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="RayCast3D" to="RayCast3D" method="_on_child_exiting_tree"]
