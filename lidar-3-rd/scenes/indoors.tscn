@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://c4slf1xa4bqt4"]
+
+[ext_resource type="Script" uid="uid://c0temtqfw8rwm" path="res://code/camera_3d_2.gd" id="1_oe0ut"]
+[ext_resource type="Script" uid="uid://bnqldswverli4" path="res://code/Person.gd" id="3_eke28"]
+[ext_resource type="Script" uid="uid://doj25wykm11c6" path="res://code/closerayleft.gd" id="4_uod4d"]
+[ext_resource type="Script" uid="uid://di55mgmi23g73" path="res://code/closeproxray.gd" id="5_qn1vk"]
+[ext_resource type="Script" uid="uid://bpsn3dqmk4jt2" path="res://code/raycastfornavigation(current).gd" id="6_b4b07"]
+[ext_resource type="PackedScene" uid="uid://8jmi7qq1uugk" path="res://3dassets/apartment.gltf" id="6_rvd4u"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_noarx"]
+sky_material = SubResource("ProceduralSkyMaterial_a202f")
+
+[sub_resource type="Environment" id="Environment_a0tk4"]
+background_mode = 2
+sky = SubResource("Sky_noarx")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a0tk4"]
+radius = 0.1
+height = 0.395
+
+[node name="Main_scene" type="Node3D"]
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(0.9941726, -0.0906176, 0.058389973, -0.04180042, 0.1752196, 0.9836416, -0.09936631, -0.98035026, 0.17041065, 0.07593024, 8.378361, -0.0797348)
+script = ExtResource("1_oe0ut")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a0tk4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Person" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1.0000001, 5.2899995e-26, -7.704027e-13, -1.8626451e-09, 1.0000001, -2.3992525e-11, 3.1491123e-12, 9.226179e-11, 1.0000001, 5.820766e-11, 0, 7.450581e-09)
+script = ExtResource("3_eke28")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Person"]
+mesh = SubResource("CapsuleMesh_a0tk4")
+
+[node name="Camera3D" type="Camera3D" parent="Person"]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Person"]
+remote_path = NodePath("../../RayCast3D")
+update_rotation = false
+update_scale = false
+
+[node name="RayCast3D" type="RayCast3D" parent="Person"]
+transform = Transform3D(0.88860923, -2.1848598e-10, -0.45866507, -1.9647695e-10, 1, -8.570027e-10, 0.45866507, 8.5165763e-10, 0.88860923, 0, 0, 0)
+target_position = Vector3(-0.2, 0, 0)
+script = ExtResource("4_uod4d")
+
+[node name="RayCast3D2" type="RayCast3D" parent="Person"]
+transform = Transform3D(-0.7981205, -3.3637153e-09, -0.6024978, -3.3348044e-09, 1, -1.1653808e-09, 0.6024978, 1.0790983e-09, -0.7981205, 0, 0, 0)
+target_position = Vector3(-0.2, 0, 0)
+script = ExtResource("5_qn1vk")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1.0000001, 5.2899995e-26, -7.704027e-13, -1.8626451e-09, 1.0000001, -2.3992525e-11, 3.1491123e-12, 9.226179e-11, 1.0000001, 5.820766e-11, 0, 7.450581e-09)
+target_position = Vector3(0, 0, -20)
+debug_shape_thickness = 3
+script = ExtResource("6_b4b07")
+
+[node name="apartment" parent="." instance=ExtResource("6_rvd4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42922258, -0.112418175, -7.0580635)
+
+[connection signal="child_entered_tree" from="RayCast3D" to="RayCast3D" method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="RayCast3D" to="RayCast3D" method="_on_child_exiting_tree"]

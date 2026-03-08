@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Lidar 3rd"
-run/main_scene="uid://bh5ustsfvgdgn"
+run/main_scene="uid://b6feu82pb8x3r"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
