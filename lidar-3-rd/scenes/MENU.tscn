@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6feu82pb8x3r"]
+[gd_scene load_steps=3 format=3 uid="uid://b6feu82pb8x3r"]
 
 [ext_resource type="Script" uid="uid://bp4u8dlbso3ml" path="res://scenes/button.gd" id="1_vwf0h"]
+[ext_resource type="Script" uid="uid://bvrr77uhl7vue" path="res://scenes/button_2.gd" id="2_i5l7g"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -28,6 +29,7 @@ offset_top = 9.0
 offset_right = 28.0
 offset_bottom = 40.0
 text = "INDOORS"
+script = ExtResource("2_i5l7g")
 
 [node name="Button3" type="Button" parent="."]
 offset_left = 68.0
@@ -37,3 +39,5 @@ offset_bottom = 40.0
 text = "OUTDOORS"
 
 [connection signal="button_up" from="Button" to="Button" method="_on_button_up"]
+[connection signal="button_up" from="Button2" to="Button" method="_on_button_2_button_up"]
+[connection signal="button_up" from="Button2" to="Button2" method="_on_button_up"]

@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://c8f6k6bvffcp4" path="res://code/box.gd" id="2_10v3s"]
 [ext_resource type="Script" uid="uid://bnqldswverli4" path="res://code/Person.gd" id="3_xvgsr"]
 [ext_resource type="Script" uid="uid://doj25wykm11c6" path="res://code/closerayleft.gd" id="4_10v3s"]
-[ext_resource type="Script" uid="uid://bpsn3dqmk4jt2" path="res://code/raycastfornavigation(current).gd" id="5_10v3s"]
 [ext_resource type="PackedScene" uid="uid://b444pfikcm3a7" path="res://scenes/box.tscn" id="5_a6664"]
 [ext_resource type="Script" uid="uid://di55mgmi23g73" path="res://code/closeproxray.gd" id="5_cptob"]
+[ext_resource type="Script" uid="uid://d1audk35ufmou" path="res://code/raycasttester(current).gd" id="6_10v3s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -70,7 +70,7 @@ script = ExtResource("5_cptob")
 transform = Transform3D(1.0000001, 5.2899995e-26, -7.704027e-13, -1.8626451e-09, 1.0000001, -2.3992525e-11, 3.1491123e-12, 9.226179e-11, 1.0000001, 5.820766e-11, 0, 7.450581e-09)
 target_position = Vector3(0, 0, -20)
 debug_shape_thickness = 3
-script = ExtResource("5_10v3s")
+script = ExtResource("6_10v3s")
 
 [node name="StaticBody3D10" parent="." instance=ExtResource("5_a6664")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4848764, -0.00057792664, 2.8705788)

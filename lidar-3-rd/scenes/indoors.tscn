@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4slf1xa4bqt4"]
+[gd_scene load_steps=10 format=3 uid="uid://c4slf1xa4bqt4"]
 
-[ext_resource type="Script" uid="uid://c0temtqfw8rwm" path="res://code/camera_3d_2.gd" id="1_oe0ut"]
 [ext_resource type="Script" uid="uid://bnqldswverli4" path="res://code/Person.gd" id="3_eke28"]
 [ext_resource type="Script" uid="uid://doj25wykm11c6" path="res://code/closerayleft.gd" id="4_uod4d"]
+[ext_resource type="PackedScene" uid="uid://bw0bqv73w57vd" path="res://scenes/apartment.tscn" id="5_5cb45"]
 [ext_resource type="Script" uid="uid://di55mgmi23g73" path="res://code/closeproxray.gd" id="5_qn1vk"]
-[ext_resource type="Script" uid="uid://bpsn3dqmk4jt2" path="res://code/raycastfornavigation(current).gd" id="6_b4b07"]
-[ext_resource type="PackedScene" uid="uid://8jmi7qq1uugk" path="res://3dassets/apartment.gltf" id="6_rvd4u"]
+[ext_resource type="Script" uid="uid://bpsn3dqmk4jt2" path="res://code/raycastindoor(current).gd" id="6_b4b07"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -27,8 +26,7 @@ height = 0.395
 [node name="Main_scene" type="Node3D"]
 
 [node name="Camera3D2" type="Camera3D" parent="."]
-transform = Transform3D(0.9941726, -0.0906176, 0.058389973, -0.04180042, 0.1752196, 0.9836416, -0.09936631, -0.98035026, 0.17041065, 0.07593024, 8.378361, -0.0797348)
-script = ExtResource("1_oe0ut")
+transform = Transform3D(0.9941726, -0.0906176, 0.058389973, -0.04180042, 0.1752196, 0.9836416, -0.09936631, -0.98035026, 0.17041065, 1.9690927, 6.6104712, -2.040944)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a0tk4")
@@ -39,37 +37,40 @@ shadow_enabled = true
 
 [node name="Person" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1.0000001, 5.2899995e-26, -7.704027e-13, -1.8626451e-09, 1.0000001, -2.3992525e-11, 3.1491123e-12, 9.226179e-11, 1.0000001, 5.820766e-11, 0, 7.450581e-09)
+transform = Transform3D(1.0000001, 5.2899995e-26, -7.704027e-13, -1.8626451e-09, 1.0000001, -2.3992525e-11, 3.1491123e-12, 9.226179e-11, 1.0000001, 1.0177736, -0.08900286, -0.4742676)
 script = ExtResource("3_eke28")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Person"]
+transform = Transform3D(1, 6.941976e-29, 5.421011e-19, 7.555509e-23, 1, 1.7347235e-17, -2.1684043e-18, -6.938894e-17, 1, 2.0645499e-05, 0.2374593, -0.009931332)
 mesh = SubResource("CapsuleMesh_a0tk4")
 
 [node name="Camera3D" type="Camera3D" parent="Person"]
+transform = Transform3D(0.9999999, 1.8626447e-09, -2.3787092e-12, 7.555513e-23, 0.9999999, -6.826924e-11, -2.1684043e-19, -6.938894e-18, 0.9999999, 0, 0.3850756, -3.552758e-11)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Person"]
+transform = Transform3D(1, 6.3108872e-30, 5.421011e-20, 7.555514e-23, 1, 1.7347235e-18, -2.1684043e-19, -6.938894e-18, 1, 0, 0.32272205, -2.977485e-11)
 remote_path = NodePath("../../RayCast3D")
 update_rotation = false
 update_scale = false
 
 [node name="RayCast3D" type="RayCast3D" parent="Person"]
-transform = Transform3D(0.88860923, -2.1848598e-10, -0.45866507, -1.9647695e-10, 1, -8.570027e-10, 0.45866507, 8.5165763e-10, 0.88860923, 0, 0, 0)
+transform = Transform3D(0.88860923, -2.1848598e-10, -0.45866507, -1.9647695e-10, 1, -8.570027e-10, 0.45866507, 8.5165763e-10, 0.88860923, 0, 0.3082222, -2.8437253e-11)
 target_position = Vector3(-0.2, 0, 0)
 script = ExtResource("4_uod4d")
 
 [node name="RayCast3D2" type="RayCast3D" parent="Person"]
-transform = Transform3D(-0.7981205, -3.3637153e-09, -0.6024978, -3.3348044e-09, 1, -1.1653808e-09, 0.6024978, 1.0790983e-09, -0.7981205, 0, 0, 0)
+transform = Transform3D(-0.7981205, -3.3637153e-09, -0.6024978, -3.3348044e-09, 1, -1.1653808e-09, 0.6024978, 1.0790983e-09, -0.7981205, 0, 0.30907044, -2.8515412e-11)
 target_position = Vector3(-0.2, 0, 0)
 script = ExtResource("5_qn1vk")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1.0000001, 5.2899995e-26, -7.704027e-13, -1.8626451e-09, 1.0000001, -2.3992525e-11, 3.1491123e-12, 9.226179e-11, 1.0000001, 5.820766e-11, 0, 7.450581e-09)
+transform = Transform3D(1.0000001, 5.2899995e-26, -7.704027e-13, -1.8626451e-09, 1.0000001, -2.3992525e-11, 3.1491123e-12, 9.226179e-11, 1.0000001, 1.0177736, 0.23371921, -0.4742676)
 target_position = Vector3(0, 0, -20)
 debug_shape_thickness = 3
 script = ExtResource("6_b4b07")
 
-[node name="apartment" parent="." instance=ExtResource("6_rvd4u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42922258, -0.112418175, -7.0580635)
+[node name="apartment" parent="." instance=ExtResource("5_5cb45")]
+transform = Transform3D(-2.4696934e-08, 0, 0.565, 0, 0.565, 0, -0.565, 0, -2.4696934e-08, -0.82591677, -0.14235687, -0.26640105)
 
 [connection signal="child_entered_tree" from="RayCast3D" to="RayCast3D" method="_on_child_entered_tree"]
 [connection signal="child_exiting_tree" from="RayCast3D" to="RayCast3D" method="_on_child_exiting_tree"]

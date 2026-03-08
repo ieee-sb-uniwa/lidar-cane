@@ -31,7 +31,7 @@ func _process(delta):
 	if (rotation_degrees.y>-100 and rotation_degrees.y<0) or (rotation_degrees.y>0 and rotation_degrees.y<100):
 		rotation_speed = 240
 	else:
-		rotation_speed = 2000
+		rotation_speed = 3000
 	
 	#checkes the right side for an appropriate angle
 	if int (rotation_degrees.y)>=-90 and int (rotation_degrees.y)<0:

@@ -31,7 +31,7 @@ func _process(delta):
 	if (rotation_degrees.y>-100 and rotation_degrees.y<0) or (rotation_degrees.y>0 and rotation_degrees.y<100):
 		rotation_speed = 240
 	else:
-		rotation_speed = 2000
+		rotation_speed = 4000
 	
 	#checkes the right side for an appropriate angle
 	if int (rotation_degrees.y)>=-90 and int (rotation_degrees.y)<0:
@@ -60,7 +60,7 @@ func _process(delta):
 
 func rightsiderot():
 	#finds the side closest freepoint that continues forward on the right side
-	if distance > 1.2:
+	if distance > 1:
 		if (int(rotation_degrees.y)>=-10 and int(rotation_degrees.y)<=0):
 			rot_go = 0
 		else:
@@ -69,7 +69,7 @@ func rightsiderot():
 
 func leftsiderot():
 	#checks if there is a better angle that continues forward in the left side
-	if distance > 1.2 and (abs(int(rot_go))>int(rotation_degrees.y)) and mistake==1:
+	if distance > 1 and (abs(int(rot_go))>int(rotation_degrees.y)) and mistake==1:
 		if (int(rotation_degrees.y)>=0 and int(rotation_degrees.y)<=10):
 			rot_go = 0
 		else:
