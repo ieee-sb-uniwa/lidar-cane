@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvde1jt001ake"]
+
+[ext_resource type="PackedScene" uid="uid://dvqhg3b11mpdm" path="res://scenes/berlin.tscn" id="1_ayhkl"]
+[ext_resource type="PackedScene" uid="uid://bh5ustsfvgdgn" path="res://scenes/node_3d.tscn" id="2_psvee"]
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3086572, -1.4938011, 0)
+
+[node name="Berlin" parent="." instance=ExtResource("1_ayhkl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3086572, 1.4938011, 0)
+
+[node name="Main_scene" parent="." instance=ExtResource("2_psvee")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.907651, 2.4807124, 56.683468)

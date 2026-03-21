@@ -49,8 +49,6 @@ script = ExtResource("3_xvgsr")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Person"]
 mesh = SubResource("CapsuleMesh_a0tk4")
 
-[node name="Camera3D" type="Camera3D" parent="Person"]
-
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Person"]
 remote_path = NodePath("../../RayCast3D")
 update_rotation = false
@@ -65,6 +63,9 @@ script = ExtResource("4_10v3s")
 transform = Transform3D(-0.7981205, -3.3637153e-09, -0.6024978, -3.3348044e-09, 1, -1.1653808e-09, 0.6024978, 1.0790983e-09, -0.7981205, 0, 0, 0)
 target_position = Vector3(-0.2, 0, 0)
 script = ExtResource("5_cptob")
+
+[node name="Camera3D" type="Camera3D" parent="Person"]
+transform = Transform3D(0.9999999, 1.8626447e-09, -2.3787092e-12, 7.555513e-23, 0.9999999, -6.826924e-11, -2.1684043e-19, -6.938894e-18, 0.9999999, 0, 0, 0)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1.0000001, 5.2899995e-26, -7.704027e-13, -1.8626451e-09, 1.0000001, -2.3992525e-11, 3.1491123e-12, 9.226179e-11, 1.0000001, 5.820766e-11, 0, 7.450581e-09)
