@@ -13,6 +13,9 @@ dependencies:
   universal_ble: ^1.2.0
   mobile_scanner: ^7.2.0
   geolocator: ^14.0.2
+  google_maps_flutter: ^2.17.0
+  flutter_config: ^2.0.2
+
 
 dev_dependencies:
   flutter_test:

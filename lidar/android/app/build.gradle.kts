@@ -42,3 +42,4 @@ android {
 flutter {
     source = "../.."
 }
+apply from: project(':flutter_config').projectDir.getPath() + "/dotenv.gradle"

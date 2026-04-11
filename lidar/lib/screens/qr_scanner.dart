@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import '../services/ble_service.dart'; // Εισαγωγή της λογικής Bluetooth
+import '../services/ble_service.dart';
 import '../services/parser.dart';
+import 'navigation.dart';
 
+//!!! for this to work with a raspberry pi you should run a ble GATT script on the pi!!!
 class QrScannerPage extends StatefulWidget {
   const QrScannerPage({super.key});
 
@@ -15,6 +17,12 @@ class _QrScannerPageState extends State<QrScannerPage> {
   //this variable is to check whether or not we already use the scanner
   bool isProcessing = false;
   MobileScannerController controller = MobileScannerController();
+  //method tostop the camera
+  @override
+  void dispose() {
+    controller.dispose(); 
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +45,9 @@ class _QrScannerPageState extends State<QrScannerPage> {
                 //connect to the device
                 bool connected = await connectBle(context, cleanMac);
                 if(connected){
-                  Navigator.pop(context);
+                  await Navigator.push(context, 
+                    MaterialPageRoute(builder: (context) => LocationApp())
+      );
                 }
                 else{
                   setState(()  => isProcessing = false);
