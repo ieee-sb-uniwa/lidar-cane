@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'widgets/startButton.dart';
+import 'screens/shake_page.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
+  //load the environment variables and run the app
+  await dotenv.load(fileName: ".env");
   runApp(const MainApp());
 }
 

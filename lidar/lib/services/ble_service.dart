@@ -8,6 +8,7 @@ Future<bool> connectBle(BuildContext context, String deviceId) async {
   var status = await Permission.bluetoothScan.request();
   var connectStatus = await Permission.bluetoothConnect.request();
   var locationStatus = await Permission.location.request();
+  var sensorStatus = await Permission.sensors.request();
   //when the permissions are granted
   if (status.isGranted && connectStatus.isGranted) {
     AvailabilityState state = await UniversalBle.getBluetoothAvailabilityState();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import '../services/ble_service.dart';
 import '../services/parser.dart';
-import 'navigation.dart';
+import 'location_select.dart';
 
 //!!! for this to work with a raspberry pi you should run a ble GATT script on the pi!!!
 class QrScannerPage extends StatefulWidget {
@@ -46,7 +46,7 @@ class _QrScannerPageState extends State<QrScannerPage> {
                 bool connected = await connectBle(context, cleanMac);
                 if(connected){
                   await Navigator.push(context, 
-                    MaterialPageRoute(builder: (context) => LocationApp())
+                    MaterialPageRoute(builder: (context) => SearchScreen())
       );
                 }
                 else{
